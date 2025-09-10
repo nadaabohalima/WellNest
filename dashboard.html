@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellnest - Dashboard</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+       background: linear-gradient(to bottom right,  #4eb3e9, #ffffff);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #023e8a;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card {
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 10px;
+      background: #f1f9ff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      color: #023e8a;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: linear-gradient(to right,  #0077b6, #7fb5d6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #054478, #3a94e8);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Welcome to WellNest</h1>
+
+  <div class="container">
+    <p id="welcomeMsg">Loading...</p>
+
+    <div class="card">
+      <h2>👤 Personal Data</h2>
+      <button onclick="window.location.href='personal.html'">View</button>
+    </div>
+
+    <div class="card">
+      <h2>📅 Appointments</h2>
+      <button onclick="window.location.href='Appointments.html'">Book</button>
+    </div>
+
+    <div class="card">
+      <h2>📩 Contact Doctor</h2>
+      <button onclick="window.location.href='contact.html'">Contact</button>
+    </div>
+
+    <div class="card">
+      <h2>🚪 Logout</h2>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const patientData = JSON.parse(localStorage.getItem("patientData"));
+    if (patientData) {
+      document.getElementById("welcomeMsg").textContent = 
+        `Hello, ${patientData.fullName}! Manage your health services below 👇`;
+    } else {
+      document.getElementById("welcomeMsg").textContent = "Hello! Please register first.";
+    }
+
+    function logout() {
+      localStorage.clear();
+      alert("You have been logged out.");
+      window.location.href = "register.html";
+    }
+  </script>
+
+</body>
+</html>
+

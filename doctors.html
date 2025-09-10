@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellnest - Doctors</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #4eb3e9, #ffffff);
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #023e8a;
+      margin-bottom: 30px;
+    }
+
+    .doctors-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .doctor-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .doctor-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .doctor-card h3 {
+      margin: 10px 0 5px;
+      color: #0077b6;
+    }
+
+    .doctor-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .book-btn {
+      margin-top: 10px;
+      padding: 10px 15px;
+         background: linear-gradient(to right,  #0077b6, #7fb5d6);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .book-btn:hover {
+     background: linear-gradient(to right, #054478, #3a94e8);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👨‍⚕️ Our Doctors</h1>
+
+  <div class="doctors-container" id="doctors-list"></div>
+
+  <script>
+    const doctors = [
+      { name: "Dr. Seif Goda", specialty: "Cardiologist" },
+      { name: "Dr. Mohamed Hatem", specialty: "Dentist" },
+      { name: "Dr. Nada Mohamed", specialty: "Dermatologist" },
+      { name: "Dr. Salim Magdy", specialty: "Pediatrician" },
+      { name: "Dr. Mazen Abdul-Mawla", specialty: "Neurologist" },
+      { name: "Dr. Rital Al-Wakeel", specialty: "Gynecologist" },
+      { name: "Dr. Mustafa Al-Maghraby", specialty: "Orthopedic" },
+      { name: "Dr. Taher Ahmed Taher", specialty: "General Surgeon" },
+      { name: "Dr. Eyad Hasanien", specialty: "Psychiatrist" },
+      { name: "Dr. Aysel Sami", specialty: "ENT Specialist" },
+      { name: "Dr. Mohamed Romaih", specialty: "Ophthalmologist" },
+      { name: "Dr. Amr Fathi", specialty: "Oncologist" }
+    ];
+
+    const container = document.getElementById("doctors-list");
+
+    doctors.forEach((doc) => {
+      const card = document.createElement("div");
+      card.classList.add("doctor-card");
+      card.innerHTML = `
+        <img src="doctors.jpeg" alt="Doctor">
+        <h3>${doc.name}</h3>
+        <p>${doc.specialty}</p>
+        <button class="book-btn">Book Appointment</button>
+      `;
+
+      // ✅ الجزء المضاف
+      card.querySelector(".book-btn").addEventListener("click", () => {
+        localStorage.setItem("selectedDoctor", JSON.stringify(doc));
+        window.location.href = "Appointments.html";
+      });
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

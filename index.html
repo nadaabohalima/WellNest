@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellnest Medical Website</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom right,  #4eb3e9, #ffffff);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            transition: direction 0.3s;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .loading-bar::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(to right, #007bff, #00bfff);
+            animation: move 1s linear infinite;
+        }
+
+        @keyframes move {
+            0% { left: -30%; }
+            100% { left: 100%; }
+        }
+
+        .lang-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        let currentLang = "en"; 
+
+        function toggleLanguage() {
+            if (currentLang === "en") {
+                document.documentElement.lang = "ar";
+                document.body.style.direction = "rtl";
+                document.getElementById("welcome-text").innerText = "مرحبًا بك في ويلنست";
+                document.querySelector(".lang-btn").innerText = "English";
+                currentLang = "ar";
+            } else {
+                document.documentElement.lang = "en";
+                document.body.style.direction = "ltr";
+                document.getElementById("welcome-text").innerText = "Welcome to WellNest";
+                document.querySelector(".lang-btn").innerText = "عربي";
+                currentLang = "en";
+            }
+        }
+
+        setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 5000);
+    </script>
+</head>
+<body>
+
+    <button class="lang-btn" onclick="toggleLanguage()">عربي</button>
+
+    <img src="C:\Users\imacStore\Desktop\wellnest\WhatsApp Image 2025-08-09 at 1.47.13 PM.jpeg" alt="Wellnest Logo">
+
+    <h2 id="welcome-text">Welcome to WellNest</h2>
+
+    <div class="loading-bar"></div>
+
+</body>
+</html>

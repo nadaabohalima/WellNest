@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellnest - Contact Doctor</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom right,  #4eb3e9, #ffffff);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #023e8a;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: #023e8a;
+      margin-bottom: 5px;
+    }
+
+    input[type="file"],
+    textarea {
+      display: block;
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f1f9ff;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      background: linear-gradient(to right,  #0077b6, #7fb5d6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #054478, #3a94e8);
+    }
+
+    .success {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📩 Contact Doctor</h1>
+
+  <div class="container">
+    <form id="contactForm">
+      <div class="info">
+        <label for="file">Upload File / Image</label>
+        <input type="file" id="file" accept="image/*,.pdf,.doc,.docx">
+      </div>
+
+      <div class="info">
+        <label for="problem">Describe Your Problem</label>
+        <textarea id="problem" rows="6" placeholder="Write your health issue here..."></textarea>
+      </div>
+
+      <button type="submit">Send to Doctor</button>
+    </form>
+
+    <p class="success" id="successMsg" style="display:none;">✅ Your problem has been sent to the doctor. Please wait for a reply.</p>
+  </div>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const fileInput = document.getElementById("file");
+      const problemText = document.getElementById("problem").value;
+
+      if (!problemText.trim()) {
+        alert("⚠️ Please write your problem before sending.");
+        return;
+      }
+
+      const contactData = {
+        problem: problemText,
+        fileName: fileInput.files.length > 0 ? fileInput.files[0].name : "No file uploaded"
+      };
+
+      // تخزين مؤقت في LocalStorage
+      localStorage.setItem("contactDoctor", JSON.stringify(contactData));
+
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("contactForm").reset();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellnest - Personal Data</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom right,  #4eb3e9, #ffffff);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #023e8a;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .info {
+      margin-bottom: 15px;
+    }
+
+    .info label {
+      display: block;
+      font-weight: bold;
+      color: #023e8a;
+      margin-bottom: 5px;
+    }
+
+    .info p {
+      margin: 0;
+      padding: 10px;
+      background: #f1f9ff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background: linear-gradient(to right,  #0077b6, #7fb5d6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #054478, #3a94e8);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👤 Personal Data</h1>
+
+  <div class="container">
+    <div class="info">
+      <label>Full Name</label>
+      <p id="fullName">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Email</label>
+      <p id="email">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Phone</label>
+      <p id="phone">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Age</label>
+      <p id="age">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Gender</label>
+      <p id="gender">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Blood Type</label>
+      <p id="bloodType">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Height (cm)</label>
+      <p id="height">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Weight (kg)</label>
+      <p id="weight">Loading...</p>
+    </div>
+
+    <div class="info">
+      <label>Medical History</label>
+      <p id="history">Loading...</p>
+    </div>
+
+    <button onclick="window.location.href='Appointments.html'">📅 Book Appointment</button>
+  </div>
+
+  <script>
+    // جلب بيانات المريض من LocalStorage (من صفحة register)
+    const patientData = JSON.parse(localStorage.getItem("patientData"));
+
+    if (patientData) {
+      document.getElementById("fullName").textContent = patientData.fullName || "N/A";
+      document.getElementById("email").textContent = patientData.email || "N/A";
+      document.getElementById("phone").textContent = patientData.phone || "N/A";
+      document.getElementById("age").textContent = patientData.age || "N/A";
+      document.getElementById("gender").textContent = patientData.gender || "N/A";
+      document.getElementById("bloodType").textContent = patientData.bloodType || "N/A";
+      document.getElementById("height").textContent = patientData.height || "N/A";
+      document.getElementById("weight").textContent = patientData.weight || "N/A";
+      document.getElementById("history").textContent = patientData.history || "N/A";
+    } else {
+      alert("⚠️ No patient data found, please register first.");
+      window.location.href = "register.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellnest - Appointments</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom right,  #4eb3e9, #ffffff);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #023e8a;
+      margin-bottom: 30px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #023e8a;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: linear-gradient(to right,  #0077b6, #7fb5d6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+       background: linear-gradient(to right, #054478, #3a94e8);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📅 Book Appointment</h1>
+
+  <form id="appointmentForm">
+    <label for="doctor">Select Doctor</label>
+    <select id="doctor">
+      <option value="">-- Choose a Doctor --</option>
+    </select>
+
+    <label for="date">Select Date</label>
+    <input type="date" id="date" required>
+
+    <label for="time">Select Time</label>
+    <input type="time" id="time" required>
+
+    <button type="submit">Confirm Appointment</button>
+  </form>
+
+  <!-- زر البيانات الشخصية -->
+  <div style="max-width:400px; margin:20px auto; text-align:center;">
+    <button onclick="window.location.href='personal.html'">Personal Data</button>
+  </div>
+
+  <div style="max-width:400px; margin:20px auto; text-align:center;">
+    <button onclick="window.location.href='contact.html'">Contact Doctor</button>
+  </div>
+
+  <script>
+    // === تهيئة الأطباء ===
+    const selectedDoctor = JSON.parse(localStorage.getItem("selectedDoctor"));
+    const doctorSelect = document.getElementById("doctor");
+
+    if (selectedDoctor) {
+      const option = document.createElement("option");
+      option.value = selectedDoctor.name;
+      option.textContent = `${selectedDoctor.name} - ${selectedDoctor.specialty}`;
+      option.selected = true;
+      doctorSelect.appendChild(option);
+    }
+
+    const extraDoctors = [
+      "Dr. Default One - General Practitioner",
+      "Dr. Default Two - Dentist"
+    ];
+
+    extraDoctors.forEach(doc => {
+      const opt = document.createElement("option");
+      opt.value = doc;
+      opt.textContent = doc;
+      doctorSelect.appendChild(opt);
+    });
+
+    // === طلب إذن الإشعارات أول مرة ===
+    if ("Notification" in window) {
+      if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+        Notification.requestPermission();
+      }
+    }
+
+    // === عند تأكيد الحجز ===
+    document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const doctor = doctorSelect.value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      if (!doctor || !date || !time) {
+        alert("⚠️ Please complete all fields before booking.");
+        return;
+      }
+
+      // حفظ بيانات الحجز
+      localStorage.setItem("appointment", JSON.stringify({
+        doctor, date, time
+      }));
+
+      // توجيه إلى صفحة الشكر
+      window.location.href = "thank.html";
+    });
+  </script>
+
+</body>
+</html>
+
+
+
